@@ -40,10 +40,14 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val fragment
         _binding = null
     }
 
-    fun navigateTo(targetDestination: Int, popUpToInclusive: Boolean = false) {
+    fun navigateTo(
+        targetDestination: Int,
+        dataToPass: Bundle? = null,
+        popUpToInclusive: Boolean = false
+    ) {
         findNavController().navigate(
             resId = targetDestination,
-            args = null,
+            args = dataToPass,
             navOptions = NavOptions.Builder().setPopUpTo(
                 destinationId = targetDestination,
                 inclusive = popUpToInclusive
