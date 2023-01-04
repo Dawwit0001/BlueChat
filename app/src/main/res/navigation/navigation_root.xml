@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_root"
+    app:startDestination="@id/conversations_nav">
+
+    <action
+        android:id="@+id/actionToConversations"
+        app:destination="@+id/conversations_nav"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/actionToScan"
+        app:destination="@+id/scan_navigation"
+        app:popUpToInclusive="true"/>
+
+    <include app:graph="@navigation/conversations_nav" />
+    <include app:graph="@navigation/scan_navigation" />
+</navigation>

@@ -11,10 +11,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/chat-feature" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core-data" />
             <option value="$PROJECT_DIR$/core-theme" />
-            <option value="$PROJECT_DIR$/login-feature" />
+            <option value="$PROJECT_DIR$/scan-feature" />
           </set>
         </option>
       </GradleProjectSettings>

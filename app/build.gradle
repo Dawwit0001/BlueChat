@@ -4,7 +4,10 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
     id 'org.jlleitschuh.gradle.ktlint' version '11.0.0'
+    id 'androidx.navigation.safeargs.kotlin'
 }
+
+apply plugin: "com.vanniktech.dependency.graph.generator"
 
 android {
     namespace 'winged.example.bluechat'
@@ -27,7 +30,7 @@ android {
         }
     }
     buildFeatures {
-        dataBinding true
+        viewBinding true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -47,7 +50,9 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":core-data"))
     implementation(project(":core-theme"))
-    implementation(project(":login-feature"))
+
+    implementation(project(":scan-feature"))
+    implementation(project(":chat-feature"))
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'

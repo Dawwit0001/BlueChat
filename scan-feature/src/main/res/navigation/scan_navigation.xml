@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scan_navigation"
+    app:startDestination="@id/scanScreenBluetoothOFF">
+
+    <fragment
+        android:id="@+id/scanScreenBluetoothOFF"
+        android:name="winged.example.scan_feature.bluetooth_off.ScanScreenBluetoothOFF"
+        android:label="fragment_scan_screen_bluetooth_off"
+        tools:layout="@layout/fragment_scan_screen_bluetooth_off">
+        <action
+            android:id="@+id/action_scanScreenBluetoothOFF_to_scanScreenBluetoothON"
+            app:destination="@id/scanScreenBluetoothON" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanScreenBluetoothON"
+        android:name="winged.example.scan_feature.bluetooth_on.ScanScreenBluetoothON"
+        android:label="fragment_scan_screen_bluetooth_on"
+        tools:layout="@layout/fragment_scan_screen_bluetooth_on" >
+        <action
+            android:id="@+id/action_scanScreenBluetoothON_to_scanScreenBluetoothOFF"
+            app:destination="@id/scanScreenBluetoothOFF" />
+    </fragment>
+</navigation>

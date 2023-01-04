@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/conversations_nav"
+    app:startDestination="@id/listOfPreviousConversations">
+
+    <fragment
+        android:id="@+id/listOfPreviousConversations"
+        android:name="winged.example.chat_feature.list_of_previous_conversations.ListOfPreviousConversations"
+        android:label="fragment_list_of_previous_conversations"
+        tools:layout="@layout/fragment_list_of_previous_conversations" />
+</navigation>

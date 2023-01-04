@@ -1,7 +1,0 @@
-<resources>
-    <string name="beforeWeStart">Before we start…</string>
-    <string name="createAnAccount">Create an account:</string>
-    <string name="yourNickname">Your nickname:</string>
-    <string name="startMessaging">Start messaging!</string>
-    <string name="nickNameHint">eg. Dawid Witkowski :)</string>
-</resources>

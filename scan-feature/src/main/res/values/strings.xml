@@ -1,0 +1,10 @@
+<resources>
+    <string name="turnOnBluetoothToFindYourFriends">Turn on Bluetooth to find your friends</string>
+    <string name="turnOn">Turn on</string>
+
+    <string name="scanForDevicesToFindYourFriends">Scan for devices to find your friends or make your device discoverable for your friends to be able to find you</string>
+    <string name="scanForDevices">Scan for devices</string>
+    <string name="makeDiscoverable">Make discoverable</string>
+    <string name="foundDevices">Found devices:</string>
+    <string name="pairedDevices">Paired devices:</string>
+</resources>
