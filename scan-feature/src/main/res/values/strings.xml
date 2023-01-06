@@ -7,4 +7,5 @@
     <string name="makeDiscoverable">Make discoverable</string>
     <string name="foundDevices">Found devices:</string>
     <string name="pairedDevices">Paired devices:</string>
+    <string name="withoutRequiredPermissionAppWontWork">Without this permission this app may not work correctly, please make sure to accept</string>
 </resources>

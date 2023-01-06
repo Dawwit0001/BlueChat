@@ -1,24 +1,35 @@
 package winged.example.core.baseFragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.viewbinding.ViewBinding
 
 /**
 This is a base class, every "fragment" in this app extends this class
-it is managing the navigation (which removes some boilerplate, repeating code)
-
-in the current state it is not managing the binding variables
-(like I did in other projects), because I found registering an activity (especially, if had to "fire"
-on button click) extremely unpleasant that way
-
-but If you wanted to implement it (and make this baseFragment manage binding variables for you),
-you can take a look at this gist:
-https://gist.github.com/jassielcastro/ce932f28c497c9cbdea1a44a5fa522cf
+it is managing navigation and binding variables (which removes some boilerplate, repeating code)
  */
-abstract class BaseFragment : Fragment() {
 
+typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
+
+abstract class BaseFragment<VB : ViewBinding>(
+    private val inflate: Inflate<VB>
+) : Fragment() {
+    private var _binding: VB? = null
+    protected val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = inflate.invoke(inflater, container, false)
+        return binding.root
+    }
     /** navigate to another fragment in the same graph,
      *  use exposed interfaces to navigate outside of the current graph!!!
 
@@ -40,5 +51,10 @@ abstract class BaseFragment : Fragment() {
 
     fun navigateUp() {
         findNavController().navigateUp()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
