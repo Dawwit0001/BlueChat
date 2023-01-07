@@ -2,8 +2,10 @@ package winged.example.scan_feature.bluetooth_on
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import winged.example.core.baseFragment.BaseFragment
+import winged.example.scan_feature.bluetooth_off.ScanScreenBluetoothOFFViewModel
 import winged.example.scan_feature.databinding.FragmentScanScreenBluetoothOnBinding
 import winged.example.scan_feature.navigation.ScanActions
 import javax.inject.Inject
@@ -13,6 +15,8 @@ class ScanScreenBluetoothON : BaseFragment<FragmentScanScreenBluetoothOnBinding>
 
     @Inject
     lateinit var actions: ScanActions
+
+    private val viewModel = ViewModelProvider(this)[ScanScreenBluetoothOFFViewModel::class.java]
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

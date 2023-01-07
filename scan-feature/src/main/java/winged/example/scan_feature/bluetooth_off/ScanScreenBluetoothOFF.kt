@@ -8,12 +8,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import winged.example.core.baseFragment.BaseFragment
 import winged.example.core_data.utils.Constants
@@ -30,6 +28,8 @@ class ScanScreenBluetoothOFF :
     lateinit var actions: ScanActions
 
     private lateinit var startActivityLauncher: ActivityResultLauncher<Intent>
+
+    private val viewModel = ViewModelProvider(this)[ScanScreenBluetoothOFFViewModel::class.java]
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,6 @@ class ScanScreenBluetoothOFF :
     private fun setUpTurnOnBluetoothButton() {
         binding.turnOnBluetoothBTN.setOnClickListener {
             redirectIfBluetoothIsEnabledAndAllPermissionsAreGranted()
-            Log.i("idk1", "setUpTurnOnBluetoothButton: ${areAllNecessaryPermissionsGranted()}")
         }
     }
 
@@ -78,31 +77,44 @@ class ScanScreenBluetoothOFF :
         }
     }
 
+    // still needs fixing!
     private fun areAllNecessaryPermissionsGranted(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            checkIfPermissionIsGranted(Manifest.permission.BLUETOOTH_SCAN) && checkIfPermissionIsGranted(
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val bluetoothScanPermissionEnabled = checkIfPermissionIsGranted(
+                Manifest.permission.BLUETOOTH_SCAN
+            )
+            val bluetoothAdminPermissionEnabled = checkIfPermissionIsGranted(
                 Manifest.permission.BLUETOOTH_ADMIN
-            ) && checkIfPermissionIsGranted(Manifest.permission.BLUETOOTH_ADVERTISE) && checkIfPermissionIsGranted(
+            )
+            val bluetoothAdvPermissionEnabled = checkIfPermissionIsGranted(
+                Manifest.permission.BLUETOOTH_ADVERTISE
+            )
+            val bluetoothConnectPermissionEnabled = checkIfPermissionIsGranted(
                 Manifest.permission.BLUETOOTH_CONNECT
             )
+            return bluetoothScanPermissionEnabled && bluetoothAdminPermissionEnabled && bluetoothAdvPermissionEnabled && bluetoothConnectPermissionEnabled
         } else {
-            checkIfPermissionIsGranted(Manifest.permission.BLUETOOTH) && checkIfPermissionIsGranted(
+            val bluetoothPermissionEnabled = checkIfPermissionIsGranted(
+                Manifest.permission.BLUETOOTH
+            )
+            val bluetoothAdminPermissionEnabled = checkIfPermissionIsGranted(
                 Manifest.permission.BLUETOOTH_ADMIN
             )
+            return bluetoothPermissionEnabled && bluetoothAdminPermissionEnabled
         }
     }
 
+    /** if permission is granted, returns true, if not, returns false */
     private fun checkIfPermissionIsGranted(permission: String): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
+        return requireActivity().checkSelfPermission(
             permission
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    // still needs fixing!
     private fun requestMissingPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
+            requireActivity().requestPermissions(
                 arrayOf(
                     Manifest.permission.BLUETOOTH_SCAN,
                     Manifest.permission.BLUETOOTH_ADMIN,
@@ -112,8 +124,7 @@ class ScanScreenBluetoothOFF :
                 Constants.permissionRequestCode
             )
         } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
+            requireActivity().requestPermissions(
                 arrayOf(
                     Manifest.permission.BLUETOOTH_ADMIN,
                     Manifest.permission.BLUETOOTH
